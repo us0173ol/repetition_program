@@ -6,39 +6,40 @@ public class Main {
 
     static Scanner numberScanner = new Scanner(System.in);
     static Scanner stringScanner = new Scanner(System.in);
-
+        //all credit to Clara James for the outline of this program
+        //I wasted so much time
     public static void main(String[] args) {
-
-        String[] productname = productArray();
-        for (String n:productname)
-        System.out.println("How many cups of " + n + " did you sell?");
+        //variable for to add up the total sales for the day
+        double totalSales = 0;
+        //create an array of strings to use for printing the product name in the question
+        String[] productname = {"coffee", "hot chocolate", "tea", "cappuccino"};
+        //for loop to ask questions for all four products
+        for (int p = 0; p < productname.length; p++) {
+            //call drinksales method to calculate profits
+            double drinkSales = drinksales(productname[p]);
+            //add the drink sales for each product to the total sales
+            totalSales += drinkSales;
+        }
+        //print out total sales
+        System.out.println("____________________________________");
+        System.out.println(String.format("Total sales for the day are $%.2f", totalSales));
+        System.out.println("____________________________________");
+        stringScanner.close();
+        numberScanner.close();
+    }
+    //method to ask about sales of each product and return them to main for calculating
+    //total sales
+    private static double drinksales(String prodName) {
+        System.out.println("How many cups of " + prodName + " did you sell?");
+        //variable for number of cups sold
         int cups = numberScanner.nextInt();
-            String [] proName = productArray();
-            for (String c:proName)
-            System.out.println("What does a cup of " + c + " cost?");
-        double price = numberScanner.nextInt();
-        double drinkSales = drinkSales(cups, price);
-        double totalSales = totalSales(drinkSales);
-        System.out.println("Total sales for the day are $" +totalSales);
-    }
-
-    private static double totalSales(double d) {
-        double totalSales=+ d;
-        return totalSales;
-    }
-
-    public static String [] productArray(){
-        String [] productname = {"coffee" , "hot chocolate" , "tea" , "cappuccino"};
-        String [] ret = new String [4];
-        ret[0]=productname[0];//http://stackoverflow.com/questions/15360170/returning-string-array-to-the-method-and-print-returned-array
-        ret[1]=productname[1];
-        ret[2]=productname[2];
-        ret[3]=productname[3];
-        return ret;
-    }
-    public static double drinkSales(int c, double p){
-        double drinkSales = c * p;
+        System.out.println("What does a cup of " + prodName + " cost?");
+        //variable for price per cup
+        double price = numberScanner.nextDouble();
+        //multiply the price of each cup by the number sold to get drink sales for each
+        //product
+        double drinkSales = cups * price;
         return drinkSales;
-
     }
 }
+
